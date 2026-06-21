@@ -1100,3 +1100,19 @@ input[type="date"]{
   from{ opacity: 0; transform: translateY(6px); }
   to{ opacity: 1; transform: translateY(0); }
 }
+
+/* Font Awesome icon styling */
+.cat-chip__icon i,
+.tx-row__icon i,
+.cat-bar-row__icon i,
+.cat-pick__icon i,
+.empty-state__icon i{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.emoji-pick i{
+  font-size: 19px;
+}

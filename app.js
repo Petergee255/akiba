@@ -9,26 +9,26 @@
   const STORAGE_KEY = 'akiba.v1';
 
   const DEFAULT_CATEGORIES = [
-    { id: 'food',      name: 'Food & Dining', icon: '🍲', color: 'var(--cat-1)' },
-    { id: 'transport',  name: 'Transport',     icon: '🚌', color: 'var(--cat-4)' },
-    { id: 'housing',    name: 'Housing & Rent',icon: '🏠', color: 'var(--cat-2)' },
-    { id: 'utilities',  name: 'Utilities',     icon: '💡', color: 'var(--cat-5)' },
-    { id: 'health',     name: 'Health',        icon: '💊', color: 'var(--cat-3)' },
-    { id: 'shopping',   name: 'Shopping',      icon: '🛍️', color: 'var(--cat-2)' },
-    { id: 'entertain',  name: 'Entertainment', icon: '🎬', color: 'var(--cat-3)' },
-    { id: 'education',  name: 'Education',     icon: '📚', color: 'var(--cat-4)' },
-    { id: 'airtime',    name: 'Airtime & Data',icon: '📱', color: 'var(--cat-5)' },
-    { id: 'other',      name: 'Other',         icon: '✨', color: 'var(--cat-6)' },
+    { id: 'food',      name: 'Food & Dining', icon: '<i class="fa-solid fa-utensils"></i>', color: 'var(--cat-1)' },
+    { id: 'transport',  name: 'Transport',     icon: '<i class="fa-solid fa-bus"></i>', color: 'var(--cat-4)' },
+    { id: 'housing',    name: 'Housing & Rent',icon: '<i class="fa-solid fa-house"></i>', color: 'var(--cat-2)' },
+    { id: 'utilities',  name: 'Utilities',     icon: '<i class="fa-solid fa-lightbulb"></i>', color: 'var(--cat-5)' },
+    { id: 'health',     name: 'Health',        icon: '<i class="fa-solid fa-pills"></i>', color: 'var(--cat-3)' },
+    { id: 'shopping',   name: 'Shopping',      icon: '<i class="fa-solid fa-bag-shopping"></i>', color: 'var(--cat-2)' },
+    { id: 'entertain',  name: 'Entertainment', icon: '<i class="fa-solid fa-film"></i>', color: 'var(--cat-3)' },
+    { id: 'education',  name: 'Education',     icon: '<i class="fa-solid fa-book"></i>', color: 'var(--cat-4)' },
+    { id: 'airtime',    name: 'Airtime & Data',icon: '<i class="fa-solid fa-mobile"></i>', color: 'var(--cat-5)' },
+    { id: 'other',      name: 'Other',         icon: '<i class="fa-solid fa-star"></i>', color: 'var(--cat-6)' },
   ];
 
   const INCOME_CATEGORIES = [
-    { id: 'salary',   name: 'Salary',     icon: '💼', color: 'var(--cat-1)' },
-    { id: 'business', name: 'Business',   icon: '📈', color: 'var(--cat-4)' },
-    { id: 'gift',     name: 'Gift',       icon: '🎁', color: 'var(--cat-3)' },
-    { id: 'other-in', name: 'Other',      icon: '✨', color: 'var(--cat-6)' },
+    { id: 'salary',   name: 'Salary',     icon: '<i class="fa-solid fa-briefcase"></i>', color: 'var(--cat-1)' },
+    { id: 'business', name: 'Business',   icon: '<i class="fa-solid fa-chart-line"></i>', color: 'var(--cat-4)' },
+    { id: 'gift',     name: 'Gift',       icon: '<i class="fa-solid fa-gift"></i>', color: 'var(--cat-3)' },
+    { id: 'other-in', name: 'Other',      icon: '<i class="fa-solid fa-star"></i>', color: 'var(--cat-6)' },
   ];
 
-  const EMOJI_OPTIONS = ['🍲','🚌','🏠','💡','💊','🛍️','🎬','📚','📱','✨','💼','📈','🎁','🐾','🧾','🎓','⚽','🍻','🚗','🧸','💳','🌾'];
+  const EMOJI_OPTIONS = ['<i class="fa-solid fa-utensils"></i>','<i class="fa-solid fa-bus"></i>','<i class="fa-solid fa-house"></i>','<i class="fa-solid fa-lightbulb"></i>','<i class="fa-solid fa-pills"></i>','<i class="fa-solid fa-bag-shopping"></i>','<i class="fa-solid fa-film"></i>','<i class="fa-solid fa-book"></i>','<i class="fa-solid fa-mobile"></i>','<i class="fa-solid fa-star"></i>','<i class="fa-solid fa-briefcase"></i>','<i class="fa-solid fa-chart-line"></i>','<i class="fa-solid fa-gift"></i>','<i class="fa-solid fa-paw"></i>','<i class="fa-solid fa-receipt"></i>','<i class="fa-solid fa-graduation-cap"></i>','<i class="fa-solid fa-square"></i>','<i class="fa-solid fa-wine-glass"></i>','<i class="fa-solid fa-car"></i>','<i class="fa-solid fa-cube"></i>','<i class="fa-solid fa-credit-card"></i>','<i class="fa-solid fa-leaf"></i>'];
 
   const WEEKDAY_LABELS = ['S','M','T','W','T','F','S'];
   const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -121,7 +121,7 @@
 
   function getCategory(id, type){
     const list = type === 'income' ? state.incomeCategories : state.categories;
-    return list.find(c => c.id === id) || { name: 'Other', icon: '✨', color: 'var(--cat-6)' };
+    return list.find(c => c.id === id) || { name: 'Other', icon: '<i class="fa-solid fa-star"></i>', color: 'var(--cat-6)' };
   }
 
   function allCategoriesFlat(){
@@ -129,7 +129,7 @@
   }
 
   function getCategoryAny(id){
-    return allCategoriesFlat().find(c => c.id === id) || { name: 'Other', icon: '✨', color: 'var(--cat-6)' };
+    return allCategoriesFlat().find(c => c.id === id) || { name: 'Other', icon: '<i class="fa-solid fa-star"></i>', color: 'var(--cat-6)' };
   }
 
   /* -----------------------------------------------------------

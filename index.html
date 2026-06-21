@@ -16,6 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -96,7 +98,7 @@
         <!-- populated by JS -->
       </div>
       <div class="empty-state" id="empty-home" hidden>
-        <div class="empty-state__icon">🌱</div>
+        <div class="empty-state__icon"><i class="fa-solid fa-leaf"></i></div>
         <p class="empty-state__title">Nothing recorded yet</p>
         <p class="empty-state__body">Tap the plus button to log your first income or expense.</p>
       </div>
@@ -142,7 +144,7 @@
       </div>
       <div class="category-bars" id="category-bars-full"></div>
       <div class="empty-state" id="empty-stats" hidden>
-        <div class="empty-state__icon">📊</div>
+        <div class="empty-state__icon"><i class="fa-solid fa-chart-bar"></i></div>
         <p class="empty-state__title">No expenses this month</p>
         <p class="empty-state__body">Your category breakdown will appear here once you add expenses.</p>
       </div>
@@ -176,7 +178,7 @@
     <section class="tx-grouped" id="tx-grouped"></section>
 
     <div class="empty-state" id="empty-history" hidden>
-      <div class="empty-state__icon">🔍</div>
+      <div class="empty-state__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
       <p class="empty-state__title">No matching entries</p>
       <p class="empty-state__body">Try a different search term or filter.</p>
     </div>
