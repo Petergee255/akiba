@@ -177,7 +177,8 @@
     document.getElementById('greeting-text').textContent = greeting + name;
 
     const now = new Date();
-    document.getElementById('current-month').textContent = `${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}`;
+    // Show full date (day month year) instead of only month/year
+    document.getElementById('current-month').textContent = `${now.getDate()} ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}`;
   }
 
   /* -----------------------------------------------------------
