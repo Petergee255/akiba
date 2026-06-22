@@ -631,7 +631,15 @@
     document.getElementById('btn-save-entry').textContent = selectedAddType === 'income' ? 'Save income' : 'Save expense';
     updateTypeToggleUI();
     renderCategoryPicker();
+    // ensure any previous closing state is cleared so open animates correctly
+    sheetOverlay.classList.remove('closing');
+    const existingSheet = sheetOverlay.querySelector('.sheet');
+    if(existingSheet) existingSheet.classList.remove('closing');
     sheetOverlay.hidden = false;
+    // force reflow then add open class to trigger transition
+    void sheetOverlay.offsetWidth;
+    sheetOverlay.classList.add('open');
+    if(existingSheet) existingSheet.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
@@ -649,26 +657,43 @@
     document.getElementById('btn-save-entry').textContent = 'Save changes';
     updateTypeToggleUI();
     renderCategoryPicker();
+    sheetOverlay.classList.remove('closing');
+    const existingSheet = sheetOverlay.querySelector('.sheet');
+    if(existingSheet) existingSheet.classList.remove('closing');
     sheetOverlay.hidden = false;
+    void sheetOverlay.offsetWidth;
+    sheetOverlay.classList.add('open');
+    if(existingSheet) existingSheet.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeSheet(){
-    // play closing animation then hide
-    sheetOverlay.classList.add('closing');
+    // remove open state and add closing to trigger transitions
     const sheetEl = sheetOverlay.querySelector('.sheet');
+    sheetOverlay.classList.remove('open');
+    if(sheetEl) sheetEl.classList.remove('open');
+    sheetOverlay.classList.add('closing');
     if(sheetEl) sheetEl.classList.add('closing');
-    // wait for animation to finish (fallback 400ms)
-    const done = () => {
+    // wait for transition end on the sheet element, then hide
+    const onEnd = (e) => {
+      if(e.target !== sheetEl) return;
       sheetOverlay.hidden = true;
       sheetOverlay.classList.remove('closing');
       if(sheetEl) sheetEl.classList.remove('closing');
       document.body.style.overflow = '';
-      sheetOverlay.removeEventListener('animationend', onAnim);
+      sheetEl.removeEventListener('transitionend', onEnd);
     };
-    const onAnim = (e) => { if(e.target === sheetEl || e.target === sheetOverlay) done(); };
-    sheetOverlay.addEventListener('animationend', onAnim);
-    setTimeout(done, 450);
+    if(sheetEl) sheetEl.addEventListener('transitionend', onEnd);
+    // fallback timeout in case transitionend doesn't fire
+    setTimeout(() => {
+      if(!sheetOverlay.hidden){
+        sheetOverlay.hidden = true;
+        sheetOverlay.classList.remove('closing');
+        if(sheetEl) sheetEl.classList.remove('closing');
+        document.body.style.overflow = '';
+        if(sheetEl) sheetEl.removeEventListener('transitionend', onEnd);
+      }
+    }, 500);
   }
 
   function updateTypeToggleUI(){
@@ -792,23 +817,39 @@
     document.getElementById('input-cat-name').value = '';
     selectedEmoji = EMOJI_OPTIONS[0];
     renderEmojiPicker();
+    catSheetOverlay.classList.remove('closing');
+    const catSheetEl = catSheetOverlay.querySelector('.sheet');
+    if(catSheetEl) catSheetEl.classList.remove('closing');
     catSheetOverlay.hidden = false;
+    void catSheetOverlay.offsetWidth;
+    catSheetOverlay.classList.add('open');
+    if(catSheetEl) catSheetEl.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function closeCatSheet(){
-    catSheetOverlay.classList.add('closing');
     const sheetEl = catSheetOverlay.querySelector('.sheet');
+    catSheetOverlay.classList.remove('open');
+    if(sheetEl) sheetEl.classList.remove('open');
+    catSheetOverlay.classList.add('closing');
     if(sheetEl) sheetEl.classList.add('closing');
-    const done = () => {
+    const onEnd = (e) => {
+      if(e.target !== sheetEl) return;
       catSheetOverlay.hidden = true;
       catSheetOverlay.classList.remove('closing');
       if(sheetEl) sheetEl.classList.remove('closing');
       document.body.style.overflow = '';
-      catSheetOverlay.removeEventListener('animationend', onAnim);
+      sheetEl.removeEventListener('transitionend', onEnd);
     };
-    const onAnim = (e) => { if(e.target === sheetEl || e.target === catSheetOverlay) done(); };
-    catSheetOverlay.addEventListener('animationend', onAnim);
-    setTimeout(done, 450);
+    if(sheetEl) sheetEl.addEventListener('transitionend', onEnd);
+    setTimeout(() => {
+      if(!catSheetOverlay.hidden){
+        catSheetOverlay.hidden = true;
+        catSheetOverlay.classList.remove('closing');
+        if(sheetEl) sheetEl.classList.remove('closing');
+        document.body.style.overflow = '';
+        if(sheetEl) sheetEl.removeEventListener('transitionend', onEnd);
+      }
+    }, 500);
   }
 
   function renderEmojiPicker(){

@@ -816,13 +816,16 @@ a{ color: inherit; text-decoration: none; }
   align-items: flex-end;
   justify-content: center;
   opacity: 0;
-  animation: overlayIn 0.25s var(--ease) forwards;
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease);
 }
-@keyframes overlayIn{ to{ opacity: 1; } }
 
-/* closing animation */
-.sheet-overlay.closing{ animation: overlayOut 0.22s var(--ease) forwards; }
-@keyframes overlayOut{ from{ opacity: 1; } to{ opacity: 0; } }
+/* visible state */
+.sheet-overlay.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+.sheet-overlay.closing{ opacity: 0; pointer-events: none; }
 
 .sheet{
   width: 100%;
@@ -833,10 +836,14 @@ a{ color: inherit; text-decoration: none; }
   border-radius: 28px 28px 0 0;
   padding: 10px 20px calc(env(safe-area-inset-bottom, 0px) + 28px);
   transform: translateY(100%);
-  animation: sheetIn 0.36s var(--ease-spring) forwards;
   box-shadow: var(--shadow-pop);
+  transition: transform 0.36s var(--ease-spring);
+  will-change: transform;
 }
-@keyframes sheetIn{ to{ transform: translateY(0); } }
+
+/* visible state */
+.sheet.open{ transform: translateY(0); }
+.sheet.closing{ transform: translateY(100%); }
 
 /* closing animation for sheet */
 .sheet.closing{ animation: sheetOut 0.32s var(--ease-spring) forwards; }
