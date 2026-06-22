@@ -825,6 +825,10 @@ a{ color: inherit; text-decoration: none; }
 }
 @keyframes overlayIn{ to{ opacity: 1; } }
 
+/* closing animation */
+.sheet-overlay.closing{ animation: overlayOut 0.22s var(--ease) forwards; }
+@keyframes overlayOut{ from{ opacity: 1; } to{ opacity: 0; } }
+
 .sheet{
   width: 100%;
   max-width: 480px;
@@ -838,6 +842,10 @@ a{ color: inherit; text-decoration: none; }
   box-shadow: var(--shadow-pop);
 }
 @keyframes sheetIn{ to{ transform: translateY(0); } }
+
+/* closing animation for sheet */
+.sheet.closing{ animation: sheetOut 0.32s var(--ease-spring) forwards; }
+@keyframes sheetOut{ from{ transform: translateY(0); } to{ transform: translateY(100%); } }
 
 .sheet--small{ }
 

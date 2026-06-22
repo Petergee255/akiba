@@ -654,8 +654,21 @@
   }
 
   function closeSheet(){
-    sheetOverlay.hidden = true;
-    document.body.style.overflow = '';
+    // play closing animation then hide
+    sheetOverlay.classList.add('closing');
+    const sheetEl = sheetOverlay.querySelector('.sheet');
+    if(sheetEl) sheetEl.classList.add('closing');
+    // wait for animation to finish (fallback 400ms)
+    const done = () => {
+      sheetOverlay.hidden = true;
+      sheetOverlay.classList.remove('closing');
+      if(sheetEl) sheetEl.classList.remove('closing');
+      document.body.style.overflow = '';
+      sheetOverlay.removeEventListener('animationend', onAnim);
+    };
+    const onAnim = (e) => { if(e.target === sheetEl || e.target === sheetOverlay) done(); };
+    sheetOverlay.addEventListener('animationend', onAnim);
+    setTimeout(done, 450);
   }
 
   function updateTypeToggleUI(){
@@ -783,8 +796,19 @@
     document.body.style.overflow = 'hidden';
   }
   function closeCatSheet(){
-    catSheetOverlay.hidden = true;
-    document.body.style.overflow = '';
+    catSheetOverlay.classList.add('closing');
+    const sheetEl = catSheetOverlay.querySelector('.sheet');
+    if(sheetEl) sheetEl.classList.add('closing');
+    const done = () => {
+      catSheetOverlay.hidden = true;
+      catSheetOverlay.classList.remove('closing');
+      if(sheetEl) sheetEl.classList.remove('closing');
+      document.body.style.overflow = '';
+      catSheetOverlay.removeEventListener('animationend', onAnim);
+    };
+    const onAnim = (e) => { if(e.target === sheetEl || e.target === catSheetOverlay) done(); };
+    catSheetOverlay.addEventListener('animationend', onAnim);
+    setTimeout(done, 450);
   }
 
   function renderEmojiPicker(){
